@@ -14,7 +14,7 @@ var ground;
 var space = false;
 
 function setup() {
-  canvas = createCanvas(1500, 650);
+  canvas = createCanvas(800, 650);
   canvas.parent('matter-boxes-holder');
   
   engine = Engine.create();
@@ -37,6 +37,8 @@ function setup() {
 
 function draw() {
   background(33);
+  rect(0 ,0 , width, height);
+  
   for(i = 0; i < rBox.length; ++i) {
     push();
     translate(rBox[i].position.x, rBox[i].position.y);
