@@ -32,11 +32,11 @@ function setup() {
   console.log(ground);
   
   stroke(255);
-  fill(21);
+  fill(#212121);
 }
 
 function draw() {
-  background(21);
+  background(#212121);
   for(i = 0; i < rBox.length; ++i) {
     push();
     translate(rBox[i].position.x, rBox[i].position.y);
