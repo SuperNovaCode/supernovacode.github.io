@@ -14,7 +14,7 @@ var ground;
 var space = false;
 
 function setup() {
-  canvas = createCanvas(400, 400);
+  canvas = createCanvas(1000, 650);
   canvas.parent('matter-boxes-holder');
   
   engine = Engine.create();
@@ -32,11 +32,11 @@ function setup() {
   console.log(ground);
   
   stroke(255);
-  fill(51);
+  fill(21);
 }
 
 function draw() {
-  background(51);
+  background(21);
   for(i = 0; i < rBox.length; ++i) {
     push();
     translate(rBox[i].position.x, rBox[i].position.y);
