@@ -11,14 +11,10 @@ var rBox = [];
 var rBoxSize = 20;
 var ground;
 
-var canvasDiv = document.getElementById('matter-boxes-holder');
-var width = canvasDiv.offsetWidth;
-
 var space = false;
 
 function setup() {
-  console.log(width);
-  canvas = createCanvas(width, 650);
+  canvas = createCanvas(1500, 650);
   canvas.parent('matter-boxes-holder');
   
   engine = Engine.create();
