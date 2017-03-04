@@ -37,7 +37,7 @@ function setup() {
 
 function draw() {
   background(33);
-  rect(0 ,0 , width, height);
+  rect(0 ,0 , width-1, height-1);
   
   for(i = 0; i < rBox.length; ++i) {
     push();
