@@ -28,6 +28,8 @@ function setup() {
   console.log(rBox);
   console.log(ground);
   
+  rBoxSize = window.innerWidth/window.innerHeight*12;
+  
   stroke(255);
   fill(33);
 }
@@ -40,7 +42,7 @@ function draw() {
     push();
     translate(rBox[i].position.x, rBox[i].position.y);
     rotate(rBox[i].angle);
-    rect(0, 0, rBoxSize, rBoxSize);
+    rect(-rBoxSize/2, -rBoxSize/2, rBoxSize, rBoxSize);
     pop();
   }
   

@@ -43,7 +43,7 @@ function draw() {
     push();
     translate(rBox[i].position.x, rBox[i].position.y);
     rotate(rBox[i].angle);
-    rect(0, 0, rBoxSize, rBoxSize);
+    rect(-rBoxSize/2, -rBoxSize/2, rBoxSize, rBoxSize);
     pop();
   }
   
