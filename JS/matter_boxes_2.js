@@ -12,7 +12,7 @@ var ground;
 var space = false;
 
 function setup() {
-  createCanvas(screenWidth, screenHeight);
+  createCanvas(window.innerWidth, window.innerHeight);
   
   engine = Engine.create();
   world = engine.world;
