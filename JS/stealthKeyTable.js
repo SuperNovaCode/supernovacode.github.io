@@ -18,8 +18,8 @@ function stealthKeyCheck() {
     var correct = 0;                                                                        // create temporary variable to count correct entrys
     
     for (var i = 0; i < stKeys.length; ++i) {
-        if ((stKeyCount[i]-1) === i) ++correct;                                             // if key press count === character position in alphabet add to 'n' of correct
+        if (stKeyCount[i] === 1) ++correct;                                                 // if key press count === character position in alphabet add to 'n' of correct
     }
     
-    if (correct === 26) window.location.href = "stDownload.html";                           // if all counts are right redirect to downloads
+    if (correct === 26) window.location.href = "stDl";                           // if all counts are right redirect to downloads
 }
