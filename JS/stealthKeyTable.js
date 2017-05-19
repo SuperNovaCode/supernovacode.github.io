@@ -19,8 +19,10 @@ function stealthKeyCheck() {
     
     for (var i = 0; i < stKeys.length; ++i) {
         if (stKeyCount[i] === 1) ++correct;                                                 // if key press count === 1 add to 'n' of correct
-		stKeyCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     }
     
-    if (correct === 26) window.location.href = "stDl.html";                                 // if all counts are right redirect to downloads
+    if (correct === 26) {
+		stKeyCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+		window.location.href = "stDl.html";                                                 // if all counts are right redirect to downloads
+	}
 }
