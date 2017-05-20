@@ -71,6 +71,8 @@ function draw() {
         frameBox.push(Bodies.rectangle(mouseX, mouseY, frameBoxSize ,frameBoxSize));
         World.add(world, [frameBox[frameBox.length-1]]);
     }                                                                                       // on mouse click: create new boa at coursor position and push to world-body-list
+    
+    touchCheck();
 }
 
 function colorTick() {
@@ -82,4 +84,23 @@ function colorTick() {
         else ++hsb_backgroundHue;                                                           // ^if not move background hue by 0x01
         hsb_H_switch = 0;                                                                   // reset switcher
     } else ++hsb_H_switch;                                                                  // add 1 to switcher
+}
+
+
+// touch interaction
+var touch_active = false;
+
+function touchStarted() {
+    touch_active = true;
+}
+
+function touchEnded() {
+    touch_active = false;
+}
+
+function touchCheck() {
+    if(touch_active) {
+        frameBox.push(Bodies.rectangle(mouseX, mouseY, frameBoxSize ,frameBoxSize));
+        World.add(world, [frameBox[frameBox.length-1]]);
+    }
 }
