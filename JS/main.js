@@ -48,31 +48,42 @@ function setup() {
     if (frameBoxSize === null || frameBoxSize === 0) frameBoxSize = 20;                     // ^if not working, use the old constant
     
     // set the default colors
-    stroke(0, 0, 0x00);
-    background(hsb_backgroundHue, 0xef, 0xff);
-    fill(hsb_backgroundHue, 0xef, 0xff);
+    background(hsb_backgroundHue, 0xef, 0xff);                                              // background : hue=dynamic saturation=239 brightness=255 :: dynamic
+    stroke(0, 0, 0x00);                                                                     // frame_foreground : hue=0 saturation=0 brightness=0 :: black
+    fill(hsb_backgroundHue, 0xef, 0xff);                                                    // frame_background : hue=dynamic saturation=239 brightness=255 :: dynamic
 }
 
 function draw() {
     colorTick();
     
-    for (var i = 0; i < frameBox.length; ++i) {
-        push();                                                                             // prepare translation without moving base coordinate system
-        translate(frameBox[i].position.x, frameBox[i].position.y);
-        rotate(frameBox[i].angle);
-        rect(-frameBoxSize/2, -frameBoxSize/2, frameBoxSize, frameBoxSize);
-        pop();                                                                              // cleanup base coordinate system from translation
-    }                                                                                       // redraw loop for every box
+    for (var i = 0; i < frameBox.length; ++i) render(frameBox[i]);                          // render loop for every box
     
+    interactionCheck();
+}
+
+function render(box) {
+    push();                                                                                 // prepare translation without moving base coordinate system
+    translate(box.position.x, box.position.y);
+    rotate(box.angle);
+    rect(-frameBoxSize/2, -frameBoxSize/2, frameBoxSize, frameBoxSize);
+    pop();                                                                                  // cleanup base coordinate system from translation
+}
+
+function interactionCheck() {
     keyCheck();                                                                             // check for interaction with keyTable.js
     stealthKeyCheck();                                                                      // check for interaction with stealthKeyTable.js
-    
-    if (mouseIsPressed) {
-        frameBox.push(Bodies.rectangle(mouseX, mouseY, frameBoxSize ,frameBoxSize));
-        World.add(world, [frameBox[frameBox.length-1]]);
-    }                                                                                       // on mouse click: create new boa at coursor position and push to world-body-list
-    
-    touchCheck();
+    mouseCheck();                                                                           // possible mouse actions
+    touchCheck();                                                                           // possible touch actions
+}
+
+function createBox() {
+    frameBox.push(
+        Bodies.rectangle(
+            mouseX+random(-2, 2),
+            mouseY+random(-2, 2),
+            frameBoxSize ,frameBoxSize)
+    );                                                                                      // create new box and push it to the storage array
+    World.add(world, [frameBox[frameBox.length-1]]);                                        // add ^box to world
 }
 
 function colorTick() {
@@ -86,21 +97,11 @@ function colorTick() {
     } else ++hsb_H_switch;                                                                  // add 1 to switcher
 }
 
+// mouse interaction
+function mouseCheck() {if (mouseIsPressed) createBox();}                                    // mouse button held >> createBox()
 
 // touch interaction
-var touch_active = false;
-
-function touchStarted() {
-    touch_active = true;
-}
-
-function touchEnded() {
-    touch_active = false;
-}
-
-function touchCheck() {
-    if(touch_active) {
-        frameBox.push(Bodies.rectangle(mouseX, mouseY, frameBoxSize ,frameBoxSize));
-        World.add(world, [frameBox[frameBox.length-1]]);
-    }
-}
+var touchIsPressed = false;                                                                 // create a variable similar to mouseIsPressed for touch intercaction
+function touchStarted() {touchIsPressed = true;}                                            // begin holding touch
+function touchEnded() {touchIsPressed = false;}                                             // end holding touch
+function touchCheck() {if (touchIsPressed) createBox();}                                    // touch held >> createBox()
